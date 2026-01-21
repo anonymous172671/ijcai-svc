@@ -348,9 +348,9 @@
                     <a href="#abstract">📝 Abstract</a>
                 </div>
                 <div class="nav-bottom">
-                    <a href="#mix-section">🎵 Mix-Vocal</a>
-                    <a href="#speech-section">🗣️ Speech-Enhanced</a>
-                    <a href="#sing-section">🎤 Sing-Enhanced</a>
+                    <a href="#mix-section">🎵 Mix-Vocal Inference</a>
+                    <a href="#speech-section">🗣️ Speech As Timbre</a>
+                    <a href="#sing-section">🎤 Singing As Timbre</a>
                 </div>
             </div>
         </nav>
@@ -378,7 +378,7 @@
             <div id="mix-container"></div>
             
             <div class="spec-section">
-                <h3>🔍 Visual Analysis (Case: 0b15fd96)</h3>
+                <h3>🔍 Mix-Vocal Inference (Case: 0b15fd96)</h3>
                 <p style="font-size:0.85rem; color:#aaa; margin-bottom:15px;">
                     Comparison of harmonic removal capabilities. Note how <b>Ours</b> maintains the cleanest spectral structure compared to baselines.
                 </p>
@@ -546,6 +546,9 @@
                         card_comments: {
                             "source": "Clean singing input",
                             "target": "Speech ref.",
+                            "FreeSVC": "",
+                            "Samoye": "",
+                            "Seed-VC": "",
                             "Ours": "Improved low register"
                         }
                     },
@@ -737,7 +740,7 @@
                         modelPath = `./${taskConfig.root}/${model.folder}/${item.filename}`;
                     }
                     
-                    const defaultText = model.isOurs ? "Proposed Method" : `${model.name} Result`;
+                    const defaultText = model.isOurs ? "Proposed Method" : ` `;
                     outputsRow.appendChild(createCard(
                         model.name, 
                         model.isOurs ? 'Ours' : 'Baseline', 
