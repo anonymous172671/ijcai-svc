@@ -29,18 +29,16 @@
             color: var(--text-main);
             padding: 40px 20px;
             line-height: 1.6;
-            font-size: 14px; /* === 修改点：基础字号由 15px 降至 14px === */
+            font-size: 14px;
         }
 
         .container { max-width: 1400px; margin: 0 auto; }
 
-        /* ================= 标题 (Header) ================= */
+        /* ================= Header ================= */
         header { text-align: center; margin-bottom: 30px; }
         
         h1 { 
-            /* === 保持不变：1.2rem === */
             font-size: 1.2rem; 
-            
             font-weight: 800; 
             background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); 
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
@@ -53,24 +51,34 @@
 
         .subtitle { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;}
 
-        /* ================= 导航栏 (Navbar) ================= */
+        /* ================= Navbar ================= */
         nav {
             display: flex;
             justify-content: center;
             margin-bottom: 40px;
         }
 
-        nav ul { 
-            list-style: none; 
-            display: flex; 
-            gap: 15px; 
+        .nav-container {
             background: rgba(255, 255, 255, 0.05);
-            padding: 8px 25px; /* 稍微缩小内边距 */
-            border-radius: 50px;
+            padding: 15px 30px;
+            border-radius: 20px;
             border: 1px solid var(--card-border);
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            flex-wrap: wrap;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .nav-top {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-bottom {
+            display: flex;
+            gap: 15px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         nav a { 
@@ -80,7 +88,8 @@
             padding: 6px 14px;
             border-radius: 20px;
             transition: all 0.3s;
-            font-size: 0.85rem; /* 缩小导航字号 */
+            font-size: 0.85rem; 
+            display: inline-block;
         }
 
         nav a:hover { 
@@ -89,14 +98,15 @@
             transform: translateY(-2px);
         }
 
-        /* ================= 内容区布局 ================= */
+        .nav-top a { font-size: 0.9rem; color: #fff; }
+
+        /* ================= Content Layout ================= */
         section {
             margin-bottom: 60px;
             scroll-margin-top: 50px;
         }
 
         h2 { 
-            /* === 修改点：从 1.8rem 降至 1.15rem (小于 h1) === */
             font-size: 1.15rem; 
             margin-bottom: 20px; 
             display: flex; align-items: center; gap: 10px; 
@@ -112,11 +122,11 @@
             color: #ddd;
             margin-bottom: 30px;
             text-align: justify;
-            font-size: 0.9rem; /* 缩小摘要文字 */
+            font-size: 0.9rem;
             line-height: 1.7;
         }
 
-        /* ================= Case 容器样式 ================= */
+        /* ================= Case Wrapper ================= */
         .case-wrapper {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--card-border);
@@ -142,12 +152,12 @@
             font-family: 'JetBrains Mono', monospace;
             color: var(--accent-secondary);
             font-weight: bold;
-            font-size: 0.8rem; /* 缩小 ID */
+            font-size: 0.8rem;
         }
 
         .case-annotation {
             color: #81d4fa;
-            font-size: 0.85rem; /* 缩小注释 */
+            font-size: 0.85rem;
             font-style: italic;
             flex: 1;
             text-align: right;
@@ -155,7 +165,7 @@
         }
 
         .row-label {
-            font-size: 0.75rem; /* 缩小行标签 */
+            font-size: 0.75rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -167,7 +177,7 @@
             line-height: 1;
         }
 
-        /* 第一行：输入源 (2列) */
+        /* Row 1: Inputs */
         .inputs-row {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -175,13 +185,14 @@
             margin-bottom: 25px;
         }
 
-        /* 第二行：模型输出 (4列并排) */
+        /* Row 2: Outputs */
         .outputs-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
         }
 
+        /* Audio Card */
         .audio-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -212,7 +223,7 @@
 
         .card-title { 
             font-weight: 600; 
-            font-size: 0.85rem; /* 缩小卡片标题 */
+            font-size: 0.85rem;
             color: #fff; 
         }
         
@@ -228,7 +239,7 @@
         .tag.source { background: var(--accent-blue); color: white; }
 
         .card-note {
-            font-size: 0.75rem; /* 缩小卡片注释 */
+            font-size: 0.75rem;
             color: var(--text-muted);
             background: rgba(0,0,0,0.2);
             padding: 6px;
@@ -240,7 +251,7 @@
 
         audio { width: 100%; height: 26px; filter: invert(1) hue-rotate(180deg) contrast(0.8); opacity: 0.8; }
 
-        /* ================= 频谱图可视化 ================= */
+        /* ================= Spectrograms ================= */
         .spec-section { 
             margin-top: 35px; 
             border-top: 1px solid var(--card-border); 
@@ -251,7 +262,7 @@
         }
         
         .spec-section h3 {
-            font-size: 1.0rem; /* 缩小 h3 */
+            font-size: 1.0rem;
             color: var(--text-muted);
             margin-bottom: 15px;
             border-left: 3px solid var(--accent-blue);
@@ -307,19 +318,18 @@
             border-radius: 5px;
         }
 
-        /* 响应式适配 */
         @media (max-width: 1200px) {
             .outputs-row { grid-template-columns: 1fr 1fr; } 
         }
         @media (max-width: 600px) {
             .outputs-row { grid-template-columns: 1fr; }
             .inputs-row { grid-template-columns: 1fr; }
-            
             h1 { font-size: 1.0rem; } 
-            h2 { font-size: 1.1rem; } 
-            .subtitle { font-size: 0.75rem; }
-            
+            h2 { font-size: 1.15rem; } 
+            .subtitle { font-size: 0.8rem; }
             .case-annotation { text-align: left; margin-left: 0; margin-top: 10px; font-size: 0.8rem; }
+            .nav-container { padding: 10px 15px; width: 100%; }
+            .nav-bottom { gap: 8px; }
         }
     </style>
 </head>
@@ -333,12 +343,16 @@
         </header>
 
         <nav>
-            <ul>
-                <li><a href="#abstract">Abstract</a></li>
-                <li><a href="#mix-section">Mix-Vocal</a></li>
-                <li><a href="#speech-section">Speech-Enhanced</a></li>
-                <li><a href="#sing-section">Sing-Enhanced</a></li>
-            </ul>
+            <div class="nav-container">
+                <div class="nav-top">
+                    <a href="#abstract">📝 Abstract</a>
+                </div>
+                <div class="nav-bottom">
+                    <a href="#mix-section">🎵 Mix-Vocal</a>
+                    <a href="#speech-section">🗣️ Speech-Enhanced</a>
+                    <a href="#sing-section">🎤 Sing-Enhanced</a>
+                </div>
+            </div>
         </nav>
 
         <section id="abstract">
@@ -369,7 +383,11 @@
                     Comparison of harmonic removal capabilities. Note how <b>Ours</b> maintains the cleanest spectral structure compared to baselines.
                 </p>
                 <div class="spec-grid">
-                    <div class="spec-item"><img src="./spectrograms/mix/source.png" loading="lazy" alt="Source"><div class="spec-label">Source</div></div>
+                    <div class="spec-item"><img src="./spectrograms/mix/source.png" loading="lazy" alt="Source"><div class="spec-label">Source (Mix)</div></div>
+                    <div class="spec-item" style="border-color: #2ecc71;">
+                        <img src="./spectrograms/mix/clean_vocal_0b15fd96.png" loading="lazy" alt="Clean Vocal">
+                        <div class="spec-label" style="color:#2ecc71;">Clean Vocal (GT)</div>
+                    </div>
                     <div class="spec-item"><img src="./spectrograms/mix/FreeSVC.png" loading="lazy" alt="FreeSVC"><div class="spec-label">FreeSVC</div></div>
                     <div class="spec-item"><img src="./spectrograms/mix/Samoye.png" loading="lazy" alt="Samoye"><div class="spec-label">Samoye</div></div>
                     <div class="spec-item"><img src="./spectrograms/mix/Seed-VC.png" loading="lazy" alt="Seed-VC"><div class="spec-label">Seed-VC</div></div>
@@ -379,7 +397,7 @@
         </section>
 
         <section id="speech-section">
-            <h2>🗣️ Speech-Enhanced Task</h2>
+            <h2>🗣️ Cases of reasoning using speech as references</h2>
             <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">
                 Zero-Shot SVC using speech recordings as the target timbre reference.
             </p>
@@ -402,9 +420,9 @@
         </section>
 
         <section id="sing-section">
-            <h2>🎤 Sing-Enhanced Task</h2>
+            <h2>🎤 Cases of reasoning using singing as references</h2>
             <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">
-                Zero-Shot Singing Voice Conversion using speech timbre for inference.
+                Zero-Shot Singing Voice Conversion using sing timbre for inference.
             </p>
             <div id="sing-container"></div>
 
@@ -414,8 +432,8 @@
                     Spectrogram comparison showing reconstruction quality of upper harmonics.
                 </p>
                 <div class="spec-grid">
-                    <div class="spec-item"><img src="./spectrograms/sing/source.png" loading="lazy" alt="Source"><div class="spec-label">Source</div></div>
-                    <div class="spec-item"><img src="./spectrograms/sing/target.png" loading="lazy" alt="Target"><div class="spec-label">Target</div></div>
+                    <div class="spec-item"><img src="./spectrograms/sing/source.png" loading="lazy" alt="Source"><div class="spec-label">Source Song</div></div>
+                    <div class="spec-item"><img src="./spectrograms/sing/target.png" loading="lazy" alt="Target"><div class="spec-label">Target Timbre</div></div>
                     <div class="spec-item"><img src="./spectrograms/sing/FreeSVC.png" loading="lazy" alt="FreeSVC"><div class="spec-label">FreeSVC</div></div>
                     <div class="spec-item"><img src="./spectrograms/sing/Samoye.png" loading="lazy" alt="Samoye"><div class="spec-label">Samoye</div></div>
                     <div class="spec-item"><img src="./spectrograms/sing/Seed-VC.png" loading="lazy" alt="Seed-VC"><div class="spec-label">Seed-VC</div></div>
@@ -444,11 +462,71 @@
                     "4ab54552-5311-42ae-9196-9fb85ecb9230": "Interleaved lead and backing vocals >10s handled correctly."
                 },
                 items: [
-                    { id: "00fc7649", fullId: "00fc7649-8400-4cc9-95a4-1bbd92b0dfd7", target: "青年活力女.wav" },
-                    { id: "0b15fd96", fullId: "0b15fd96-4210-4b19-aa49-6a59267d4945", target: "女童.wav" },
-                    { id: "0ddbd2e7", fullId: "0ddbd2e7-ebae-46b3-bf56-45c8e7952fc2", target: "女童.wav" },
-                    { id: "3b813eac", fullId: "3b813eac-e2e2-4e3d-bd9e-ff20d038b964", target: "老年男1.wav" },
-                    { id: "4ab54552", fullId: "4ab54552-5311-42ae-9196-9fb85ecb9230", target: "青年解说男.wav" }
+                    { 
+                        id: "00fc7649", 
+                        fullId: "00fc7649-8400-4cc9-95a4-1bbd92b0dfd7", 
+                        target: "青年活力女.wav", 
+                        timbreLabel: "Female",
+                        card_comments: {
+                            "source": "Input contains harmonies",
+                            "target": "Reference timbre",
+                            "FreeSVC": "Noise sounds in harmonics",
+                            "Samoye": "Harmonic artifacts",
+                            "Seed-VC": "Relatively clean",
+                            "Ours": "Relatively clean"
+                        }
+                    },
+                    { 
+                        id: "0b15fd96", 
+                        fullId: "0b15fd96-4210-4b19-aa49-6a59267d4945", 
+                        target: "女童.wav", 
+                        timbreLabel: "Female",
+                        card_comments: {
+                            "source": "Heavy vocal doubling",
+                            "Ours": "Artifacts removed",
+                            "FreeSVC": "Severe pitch errors",
+                            "Samoye": "Electronic sounds in harmonics",
+                            "Seed-VC": "Frequent pitch errors",
+                            "Ours": "Relatively improved"
+                        }
+                    },
+                    { 
+                        id: "0ddbd2e7", 
+                        fullId: "0ddbd2e7-ebae-46b3-bf56-45c8e7952fc2", 
+                        target: "女童.wav", 
+                        timbreLabel: "Female",
+                        card_comments: {
+                            "source": "Sudden pitch shift at 5s",
+                            "FreeSVC": "Pitch errors at 5s",
+                            "Samoye": "Background artifacts",
+                            "Seed-VC": "Pitch errors at 5s",
+                            "Ours": "Relatively improved"
+                        }
+                    },
+                    { 
+                        id: "3b813eac", 
+                        fullId: "3b813eac-e2e2-4e3d-bd9e-ff20d038b964", 
+                        target: "老年男1.wav", 
+                        timbreLabel: "Male",
+                        card_comments: {
+                            "FreeSVC": "Choked voice",
+                            "Samoye": "Relatively clean",
+                            "Seed-VC": "Choked voice",
+                            "Ours": "Relatively clean"
+                        } 
+                    },
+                    { 
+                        id: "4ab54552", 
+                        fullId: "4ab54552-5311-42ae-9196-9fb85ecb9230", 
+                        target: "青年解说男.wav", 
+                        timbreLabel: "Male",
+                        card_comments: {
+                            "FreeSVC": "Audio drop-outs",
+                            "Samoye": "Turn-taking errors",
+                            "Seed-VC": "Turn-taking errors",
+                            "Ours": "Relatively improved"
+                        }  
+                    }
                 ]
             },
             speech: {
@@ -460,11 +538,64 @@
                     { name: 'Ours', folder: 'ours_weight_mul_1951', isOurs: true }
                 ],
                 items: [
-                    { id: "36966_002", fullId: "36966_002", target: "ita.wav", sourceOverride: "vocals.wav" },
-                    { id: "36966_007", fullId: "36966_007", target: "jap.wav", sourceOverride: "vocals.wav" },
-                    { id: "36967_005", fullId: "36967_005", target: "Gretchen.wav", sourceOverride: "vocals.wav" },
-                    { id: "38957_008", fullId: "38957_008", target: "YOUTH.wav", sourceOverride: "vocals.wav" },
-                    { id: "39749_008", fullId: "39749_008", target: "Arriety.wav", sourceOverride: "vocals.wav" }
+                    { 
+                        id: "36966_002", 
+                        fullId: "36966_002", 
+                        target: "ita.wav", 
+                        sourceOverride: "vocals.wav",
+                        card_comments: {
+                            "source": "Clean singing input",
+                            "target": "Speech ref.",
+                            "Ours": "Improved low register"
+                        }
+                    },
+                    { 
+                        id: "36966_007", 
+                        fullId: "36966_007", 
+                        target: "jap.wav", 
+                        sourceOverride: "vocals.wav",
+                        card_comments: {
+                            "source": "Clean singing input",
+                            "target": "Speech ref.",
+                            "FreeSVC": "Slightly muffled",
+                            "Samoye": "Lacks brightness"
+                        } 
+                    },
+                    { 
+                        id: "36967_005", 
+                        fullId: "36967_005", 
+                        target: "Gretchen.wav", 
+                        sourceOverride: "vocals.wav",
+                        card_comments: {
+                            "source": "Clean singing input",
+                            "target": "Speech ref.",
+                            "FreeSVC": "Mild distortion"
+                        }  
+                    },
+                    { 
+                        id: "38957_008", 
+                        fullId: "38957_008", 
+                        target: "YOUTH.wav", 
+                        sourceOverride: "vocals.wav",
+                        card_comments: {
+                            "source": "Clean singing input",
+                            "target": "Speech ref.",
+                            "Samoye": "Minor ghosting",
+                            "FreeSVC": "Mild distortion"
+                        } 
+                    },
+                    { 
+                        id: "39749_008", 
+                        fullId: "39749_008", 
+                        target: "Arriety.wav", 
+                        sourceOverride: "vocals.wav", 
+                        card_comments: {
+                            "source": "Clean singing input",
+                            "target": "Speech ref.",
+                            "Samoye": "Lacks brightness",
+                            "FreeSVC": "Mild distortion"
+                        } 
+                    }
                 ]
             },
             sing: {
@@ -476,11 +607,51 @@
                     { name: 'Ours', folder: 'ours', isOurs: true }
                 ],
                 items: [
-                    { id: "Sample 1", fullId: "1", filename: "1.wav" },
-                    { id: "Sample 2", fullId: "2", filename: "2.wav" },
-                    { id: "Sample 3", fullId: "3", filename: "3.wav" },
-                    { id: "Sample 4", fullId: "4", filename: "4.wav" },
-                    { id: "Sample 5", fullId: "5", filename: "5.wav" }
+                    { 
+                        id: "Sample 1", 
+                        fullId: "1", 
+                        filename: "1.wav",
+                        card_comments: {
+                            "source": "Clean singing input",
+                            "target": "Sing ref.",
+                            "Ours": "Tenore Drammatico"
+                        }
+                    },
+                    { 
+                        id: "Sample 2", fullId: "2", filename: "2.wav",
+                        card_comments: {
+                            "source": "Clean singing input",
+                            "target": "Sing ref.",
+                            "Ours": "Tenore Spinto"
+                        }
+                    },
+                    { 
+                        id: "Sample 3", 
+                        fullId: "3", 
+                        filename: "3.wav",
+                        card_comments: {
+                            "source": "Clean singing input",
+                            "target": "Sing ref."
+                        }
+                    },
+                    { 
+                        id: "Sample 4", fullId: "4", filename: "4.wav",
+                        card_comments: {
+                            "source": "Clean singing input",
+                            "target": "Sing ref.",
+                            "FreeSVC": "Distortion",
+                            "Samoye": "Lacks brightness",
+                            "Seed-VC": "Missing breathing pauses"
+                        }
+                    },
+                    { 
+                        id: "Sample 5", fullId: "5", filename: "5.wav",
+                        card_comments: {
+                            "source": "Clean singing input",
+                            "target": "Sing ref.",
+                            "Ours": "Deeper resonance"
+                        }
+                    }
                 ]
             }
         };
@@ -491,6 +662,9 @@
             taskConfig.items.forEach(item => {
                 const realId = item.fullId || item.id;
                 
+                // Get comments for this specific item (or empty object if none)
+                const comments = item.card_comments || {};
+
                 const caseWrapper = document.createElement('div');
                 caseWrapper.className = 'case-wrapper';
 
@@ -528,8 +702,23 @@
                     timbrePath = `./${taskConfig.root}/timbre/${item.filename}`;
                 }
 
-                inputsRow.appendChild(createCard('Source Input', 'Source', sourcePath, 'Original Input'));
-                inputsRow.appendChild(createCard('Target Timbre', 'Reference', timbrePath, `Target: ${item.target || item.filename}`));
+                // Source Card with Comment Lookup
+                inputsRow.appendChild(createCard(
+                    'Source Input', 
+                    'Source', 
+                    sourcePath, 
+                    comments['source'] || 'Original Input' 
+                ));
+                
+                // Target Card with Comment Lookup
+                const targetDisplay = item.timbreLabel ? item.timbreLabel : `Target: ${item.target || item.filename}`;
+                inputsRow.appendChild(createCard(
+                    'Target Timbre', 
+                    'Reference', 
+                    timbrePath, 
+                    comments['target'] || targetDisplay 
+                ));
+                
                 caseWrapper.appendChild(inputsRow);
 
                 const outputLabel = document.createElement('div');
@@ -547,11 +736,13 @@
                     } else {
                         modelPath = `./${taskConfig.root}/${model.folder}/${item.filename}`;
                     }
+                    
+                    const defaultText = model.isOurs ? "Proposed Method" : `${model.name} Result`;
                     outputsRow.appendChild(createCard(
                         model.name, 
                         model.isOurs ? 'Ours' : 'Baseline', 
                         modelPath, 
-                        model.isOurs ? "Proposed Method" : `${model.name} Result`, 
+                        comments[model.name] || defaultText, 
                         model.isOurs
                     ));
                 });
