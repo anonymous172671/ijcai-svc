@@ -198,11 +198,11 @@
                 <div class="spec-grid">
                     <div class="spec-card">
                         <img src="./spectrograms/speech/source.png" loading="lazy" onerror="this.src='https://via.placeholder.com/300x150?text=Missing+Source';">
-                        <div class="spec-label label-highlight">Source (Org. song)</div>
+                        <div class="spec-label label-highlight">Source (Vocals.wav)</div>
                     </div>
                     <div class="spec-card">
                         <img src="./spectrograms/speech/target.png" loading="lazy" onerror="this.src='https://via.placeholder.com/300x150?text=Missing+Target';">
-                        <div class="spec-label label-highlight">Target Timbre (Speech)</div>
+                        <div class="spec-label label-highlight">Target (Speech)</div>
                     </div>
                     <div class="spec-card"><img src="./spectrograms/speech/FreeSVC.png" loading="lazy"><div class="spec-label">FreeSVC</div></div>
                     <div class="spec-card"><img src="./spectrograms/speech/Samoye.png" loading="lazy"><div class="spec-label">Samoye</div></div>
@@ -214,7 +214,7 @@
 
         <section id="sing-section">
             <h2>🎤 Sing-Enhanced Task</h2>
-            <p style="color:var(--text-muted); margin-bottom:20px;">Using singing source vocals to ensure the conversion aligns with the target's specific singing nuances.</p>
+            <p style="color:var(--text-muted); margin-bottom:20px;">Standard singing conversion (High-frequency details).</p>
             
             <div id="sing-container" class="table-wrapper"></div>
 
@@ -224,8 +224,8 @@
                     <span class="spec-tag">Case: Sample 1</span>
                 </div>
                 <div class="spec-grid">
-                    <div class="spec-card"><img src="./spectrograms/sing/source.png" loading="lazy"><div class="spec-label label-highlight">Source (Org. song)</div></div>
-                    <div class="spec-card"><img src="./spectrograms/sing/target.png" loading="lazy"><div class="spec-label label-highlight">Target Timbre (Song)</div></div>
+                    <div class="spec-card"><img src="./spectrograms/sing/source.png" loading="lazy"><div class="spec-label label-highlight">Source</div></div>
+                    <div class="spec-card"><img src="./spectrograms/sing/target.png" loading="lazy"><div class="spec-label label-highlight">Target</div></div>
                     <div class="spec-card"><img src="./spectrograms/sing/FreeSVC.png" loading="lazy"><div class="spec-label">FreeSVC</div></div>
                     <div class="spec-card"><img src="./spectrograms/sing/Samoye.png" loading="lazy"><div class="spec-label">Samoye</div></div>
                     <div class="spec-card"><img src="./spectrograms/sing/Seed-VC.png" loading="lazy"><div class="spec-label">Seed-VC</div></div>
@@ -254,34 +254,26 @@
                 },
 
                 items: [
-                    { id: "00fc7649", fullId: "00fc7649-8400-4cc9-95a4-1bbd92b0dfd7", target: "青年活力女.wav" },
-                    { id: "0b15fd96", fullId: "0b15fd96-4210-4b19-aa49-6a59267d4945", target: "女童.wav" },
-                    { id: "0ddbd2e7", fullId: "0ddbd2e7-ebae-46b3-bf56-45c8e7952fc2", target: "女童.wav" },
-                    { id: "3b813eac", fullId: "3b813eac-e2e2-4e3d-bd9e-ff20d038b964", target: "老年男1.wav" },
-                    { id: "4ab54552", fullId: "4ab54552-5311-42ae-9196-9fb85ecb9230", target: "青年解说男.wav" }
+                    { id: "00fc7649...", fullId: "00fc7649-8400-4cc9-95a4-1bbd92b0dfd7", target: "青年活力女.wav" },
+                    { id: "0b15fd96...", fullId: "0b15fd96-4210-4b19-aa49-6a59267d4945", target: "女童.wav" },
+                    { id: "0ddbd2e7...", fullId: "0ddbd2e7-ebae-46b3-bf56-45c8e7952fc2", target: "女童.wav" },
+                    { id: "3b813eac...", fullId: "3b813eac-e2e2-4e3d-bd9e-ff20d038b964", target: "老年男1.wav" },
+                    { id: "4ab54552...", fullId: "4ab54552-5311-42ae-9196-9fb85ecb9230", target: "青年解说男.wav" }
                 ]
             },
             speech: {
                 root: 'speech-enhanced', type: 'folder_structure', sourceFile: 'vocals.wav', 
                 models: [{ name: 'FreeSVC', folder: 'freesvc' }, { name: 'Samoye', folder: 'samoye' }, { name: 'Seed-VC', folder: 'seed_vc_baseline' }, { name: 'Ours', folder: 'ours_weight_mul_1951' }],
                 items: [
-                    { id: "36966_002", fullId: "36966_002", target: "ita.wav", sourceOverride: "vocals.wav" },
-                    { id: "36966_007", fullId: "36966_007", target: "jap.wav", sourceOverride: "vocals.wav" },
-                    { id: "36967_005", fullId: "36967_005", target: "Gretchen.wav", sourceOverride: "vocals.wav" },
-                    { id: "38957_008", fullId: "38957_008", target: "YOUTH.wav", sourceOverride: "vocals.wav" },
-                    { id: "39749_008", fullId: "39749_008", target: "Arriety.wav", sourceOverride: "vocals.wav" }
+                    { id: '36966_002', fullId: '36966_002', target: 'ita.wav', sourceOverride: 'vocals.wav' }, 
+                    { id: '36966_007', fullId: '36966_007', target: 'jap.wav', sourceOverride: 'vocals.wav' },
+                    { id: '36967_005', fullId: '36967_005', target: 'Gretchen.wav', sourceOverride: 'vocals.wav' }
                 ]
             },
             sing: {
                 root: 'sing-enhanced', type: 'file_structure',
                 models: [{ name: 'FreeSVC', folder: 'free-svc' }, { name: 'Samoye', folder: 'samoye-svc' }, { name: 'Seed-VC', folder: 'seed-vc' }, { name: 'Ours', folder: 'ours' }],
-                items: [
-                    { id: "Sample 1", fullId: "1", filename: "1.wav" },
-                    { id: "Sample 2", fullId: "2", filename: "2.wav" },
-                    { id: "Sample 3", fullId: "3", filename: "3.wav" },
-                    { id: "Sample 4", fullId: "4", filename: "4.wav" },
-                    { id: "Sample 5", fullId: "5", filename: "5.wav" }
-                ]
+                items: [ { id: 'Sample 1', fullId: '1', filename: '1.wav' }, { id: 'Sample 2', fullId: '2', filename: '2.wav' } ]
             }
         };
 
@@ -298,7 +290,9 @@
             const colCount = 3 + taskConfig.models.length;
 
             // --- Header: WITH ID, and "Target Timbre" ---
-            headerRow.innerHTML = `<th class="col-id">ID</th><th class="col-input">Source</th><th class="col-input">Target Timbre</th>`;
+            let targetLabel = "Target Timbre"; 
+            headerRow.innerHTML = `<th class="col-id">ID</th><th class="col-input">Source</th><th class="col-input">${targetLabel}</th>`;
+            
             taskConfig.models.forEach(model => {
                 const th = document.createElement('th'); 
                 th.innerText = model.name; 
@@ -346,21 +340,7 @@
                 }
 
                 tr.appendChild(createAudioCell(sourcePath));
-                
-                // --- Target Column Logic ---
-                // For Mix task: Text only (Target Timbre)
-                // For others: Audio player
-                if (sectionId === 'mix-container') {
-                    const tdTarget = document.createElement('td');
-                    tdTarget.style.fontSize = "0.85rem";
-                    tdTarget.style.color = "var(--text-muted)";
-                    tdTarget.style.fontFamily = "monospace";
-                    // Only show filename text
-                    tdTarget.innerText = item.target || "N/A"; 
-                    tr.appendChild(tdTarget);
-                } else {
-                    tr.appendChild(createAudioCell(timbrePath));
-                }
+                tr.appendChild(createAudioCell(timbrePath)); // Re-enabled Target Timbre audio for all tasks
 
                 modelPaths.forEach(path => tr.appendChild(createAudioCell(path)));
                 tbody.appendChild(tr);
