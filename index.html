@@ -29,7 +29,7 @@
             color: var(--text-main);
             padding: 40px 20px;
             line-height: 1.6;
-            font-size: 15px; /* 基础字号微调 */
+            font-size: 14px; /* === 修改点：基础字号由 15px 降至 14px === */
         }
 
         .container { max-width: 1400px; margin: 0 auto; }
@@ -38,7 +38,7 @@
         header { text-align: center; margin-bottom: 30px; }
         
         h1 { 
-            /* === 保持您设定的小字号 === */
+            /* === 保持不变：1.2rem === */
             font-size: 1.2rem; 
             
             font-weight: 800; 
@@ -51,14 +51,13 @@
             padding: 0 10px;
         }
 
-        /* 副标题微调 */
-        .subtitle { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;}
+        .subtitle { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;}
 
         /* ================= 导航栏 (Navbar) ================= */
         nav {
             display: flex;
             justify-content: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         nav ul { 
@@ -66,7 +65,7 @@
             display: flex; 
             gap: 15px; 
             background: rgba(255, 255, 255, 0.05);
-            padding: 10px 25px; /* padding 稍微减小 */
+            padding: 8px 25px; /* 稍微缩小内边距 */
             border-radius: 50px;
             border: 1px solid var(--card-border);
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
@@ -81,7 +80,7 @@
             padding: 6px 14px;
             border-radius: 20px;
             transition: all 0.3s;
-            font-size: 0.85rem; /* 导航字号减小 */
+            font-size: 0.85rem; /* 缩小导航字号 */
         }
 
         nav a:hover { 
@@ -92,17 +91,17 @@
 
         /* ================= 内容区布局 ================= */
         section {
-            margin-bottom: 80px;
-            scroll-margin-top: 60px;
+            margin-bottom: 60px;
+            scroll-margin-top: 50px;
         }
 
         h2 { 
-            /* === 配合h1减小，h2从1.8rem降到1.35rem === */
-            font-size: 1.35rem; 
-            margin-bottom: 25px; 
-            display: flex; align-items: center; gap: 12px; 
+            /* === 修改点：从 1.8rem 降至 1.15rem (小于 h1) === */
+            font-size: 1.15rem; 
+            margin-bottom: 20px; 
+            display: flex; align-items: center; gap: 10px; 
             border-bottom: 1px solid var(--card-border); 
-            padding-bottom: 12px;
+            padding-bottom: 10px;
         }
         
         .info-box {
@@ -111,9 +110,9 @@
             padding: 20px;
             border-radius: 0 10px 10px 0;
             color: #ddd;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             text-align: justify;
-            font-size: 0.95rem; /* 摘要文字大小 */
+            font-size: 0.9rem; /* 缩小摘要文字 */
             line-height: 1.7;
         }
 
@@ -123,7 +122,7 @@
             border: 1px solid var(--card-border);
             border-radius: 16px;
             padding: 20px;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             box-shadow: 0 4px 30px rgba(0,0,0,0.1);
         }
 
@@ -143,12 +142,12 @@
             font-family: 'JetBrains Mono', monospace;
             color: var(--accent-secondary);
             font-weight: bold;
-            font-size: 0.85rem; /* ID字号减小 */
+            font-size: 0.8rem; /* 缩小 ID */
         }
 
         .case-annotation {
             color: #81d4fa;
-            font-size: 0.85rem; /* 注释字号减小 */
+            font-size: 0.85rem; /* 缩小注释 */
             font-style: italic;
             flex: 1;
             text-align: right;
@@ -156,7 +155,7 @@
         }
 
         .row-label {
-            font-size: 0.75rem; /* 标签字号减小 */
+            font-size: 0.75rem; /* 缩小行标签 */
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -187,7 +186,7 @@
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 10px;
-            padding: 12px; /* 卡片内边距减小 */
+            padding: 12px;
             transition: transform 0.3s;
             display: flex;
             flex-direction: column;
@@ -213,7 +212,7 @@
 
         .card-title { 
             font-weight: 600; 
-            font-size: 0.85rem; /* 卡片标题字号减小 */
+            font-size: 0.85rem; /* 缩小卡片标题 */
             color: #fff; 
         }
         
@@ -229,7 +228,7 @@
         .tag.source { background: var(--accent-blue); color: white; }
 
         .card-note {
-            font-size: 0.7rem; /* 卡片注释字号减小 */
+            font-size: 0.75rem; /* 缩小卡片注释 */
             color: var(--text-muted);
             background: rgba(0,0,0,0.2);
             padding: 6px;
@@ -245,14 +244,14 @@
         .spec-section { 
             margin-top: 35px; 
             border-top: 1px solid var(--card-border); 
-            padding-top: 25px; 
+            padding-top: 20px; 
             background: rgba(0,0,0,0.15);
             padding: 20px;
             border-radius: 12px;
         }
         
         .spec-section h3 {
-            font-size: 1.1rem; /* 可视化标题字号减小 */
+            font-size: 1.0rem; /* 缩小 h3 */
             color: var(--text-muted);
             margin-bottom: 15px;
             border-left: 3px solid var(--accent-blue);
@@ -316,10 +315,9 @@
             .outputs-row { grid-template-columns: 1fr; }
             .inputs-row { grid-template-columns: 1fr; }
             
-            /* === 手机端适配 === */
             h1 { font-size: 1.0rem; } 
-            h2 { font-size: 1.15rem; } /* 二级标题比一级略大是合理的例外，或保持1.1rem */
-            .subtitle { font-size: 0.8rem; }
+            h2 { font-size: 1.1rem; } 
+            .subtitle { font-size: 0.75rem; }
             
             .case-annotation { text-align: left; margin-left: 0; margin-top: 10px; font-size: 0.8rem; }
         }
@@ -383,7 +381,7 @@
         <section id="speech-section">
             <h2>🗣️ Speech-Enhanced Task</h2>
             <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">
-                Zero-Shot Singing Voice Conversion using speech timbre for inference.
+                Zero-Shot SVC using speech recordings as the target timbre reference.
             </p>
             <div id="speech-container"></div>
 
@@ -406,7 +404,7 @@
         <section id="sing-section">
             <h2>🎤 Sing-Enhanced Task</h2>
             <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">
-                Standard singing conversion focused on high-frequency detail preservation.
+                Zero-Shot Singing Voice Conversion using speech timbre for inference.
             </p>
             <div id="sing-container"></div>
 
