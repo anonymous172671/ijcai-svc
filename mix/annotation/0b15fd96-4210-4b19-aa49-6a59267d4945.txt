@@ -1,0 +1,1 @@
+Contains multiple vocal harmonies. Compared to Seed-VC, our method effectively mitigates this issue.

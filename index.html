@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music SVC Demo | Research Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Core Backgrounds */
+            --bg-dark: #1a1a2e;
+            --bg-mid: #16213e;
+            --bg-light: #0f3460;
+            --accent-primary: #e94560;
+            --accent-secondary: #ff6b6b;
+            --accent-blue: #3498db;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-blur: 12px;
+            --nav-height: 70px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-mid) 50%, var(--bg-light) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--text-main);
+            padding-top: var(--nav-height);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed; top: 0; width: 100%; height: var(--nav-height);
+            background: rgba(26, 26, 46, 0.85); backdrop-filter: blur(var(--glass-blur));
+            border-bottom: 1px solid var(--glass-border); z-index: 1000;
+            display: flex; align-items: center; justify-content: center;
+        }
+        nav ul { list-style: none; display: flex; gap: 30px; }
+        nav a { text-decoration: none; color: var(--text-muted); font-weight: 500; transition: color 0.3s; }
+        nav a:hover { color: var(--accent-primary); text-shadow: 0 0 8px rgba(233, 69, 96, 0.4); }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        header { text-align: center; margin-bottom: 60px; }
+        h1 { font-size: 2.8rem; margin-bottom: 10px; font-weight: 800; background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { font-size: 1.1rem; color: var(--text-muted); }
+
+        section {
+            background: var(--glass-bg); backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border); border-radius: 20px;
+            padding: 40px; margin-bottom: 50px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            scroll-margin-top: calc(var(--nav-height) + 20px);
+        }
+
+        h2 { font-size: 1.8rem; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; }
+        h2::before { content: ''; width: 4px; height: 32px; background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary)); border-radius: 2px; }
+
+        .abstract-text { text-align: justify; color: #ddd; font-size: 1.05rem; line-height: 1.8; }
+        
+        .img-container { text-align: center; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 15px; border: 1px solid var(--glass-border); margin-top: 20px; }
+        .img-container img { max-width: 65%; height: auto; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); cursor: zoom-in; transition: transform 0.3s; }
+        .img-container img:hover { transform: scale(1.02); }
+
+        /* Table Styles */
+        .table-wrapper { overflow-x: auto; border-radius: 12px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.15); }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; table-layout: fixed; min-width: 900px; }
+        thead { background: rgba(233, 69, 96, 0.1); }
+        th { padding: 18px 15px; text-align: left; font-weight: 600; color: var(--accent-primary); border-bottom: 1px solid var(--glass-border); }
+        
+        /* Column Widths */
+        th.col-id { width: 95px; } /* Fixed width for ID */
+        th.col-input { width: 15%; color: var(--accent-blue); }
+        
+        td { padding: 15px; border-bottom: 1px solid var(--glass-border); vertical-align: middle; color: #eee; }
+        tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
+        
+        /* ID Cell Style */
+        td.cell-id { 
+            font-family: 'Consolas', 'Monaco', monospace; 
+            color: var(--text-muted); 
+            font-size: 0.85rem; 
+            font-weight: bold;
+            opacity: 0.9;
+        }
+
+        /* Annotation Row */
+        tr.annotation-row { background: rgba(52, 152, 219, 0.05); }
+        tr.annotation-row td { padding: 10px 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; color: #81d4fa; border-bottom: none; font-style: italic; }
+        
+        /* Audio Player */
+        audio { width: 100%; height: 35px; border-radius: 5px; filter: invert(1) hue-rotate(180deg) contrast(0.8); opacity: 0.9; outline: none; }
+
+        /* Spectrograms */
+        .spec-container { margin-top: 30px; background: rgba(0, 0, 0, 0.3); border-radius: 15px; padding: 25px; border: 1px solid var(--glass-border); }
+        .spec-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .spec-header h3 { font-size: 1.1rem; color: var(--text-muted); font-weight: 500; }
+        .spec-tag { background: var(--accent-primary); color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; }
+        .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
+        .spec-card { background: rgba(255, 255, 255, 0.02); border-radius: 10px; overflow: hidden; border: 1px solid var(--glass-border); transition: transform 0.3s, border-color 0.3s; }
+        .spec-card:hover { transform: translateY(-5px); border-color: var(--accent-primary); }
+        .spec-card img { width: 100%; display: block; filter: brightness(1.1); }
+        .spec-label { padding: 10px; text-align: center; font-size: 0.8rem; color: #ccc; background: rgba(0,0,0,0.2); border-top: 1px solid var(--glass-border); }
+        .label-highlight { color: var(--accent-primary); font-weight: bold; }
+        .error-badge { color: var(--accent-secondary); font-size: 0.75rem; border: 1px solid var(--accent-secondary); padding: 2px 6px; border-radius: 4px; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .spec-grid { grid-template-columns: 1fr 1fr; }
+            section { padding: 20px; }
+            .img-container img { max-width: 90%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#abstract">Abstract</a></li>
+            <li><a href="#mix-section">Mix</a></li>
+            <li><a href="#speech-section">Speech-Enhanced</a></li>
+            <li><a href="#sing-section">Sing-Enhanced</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <header>
+            <h1>Aligning Speech-Referenced Zero-Shot SVC</h1>
+            <p class="subtitle">via Singing-Specific Inductive Biases and Post-Training Reinforcement Learning</p>
+        </header>
+
+        <section id="abstract">
+            <h2>📝 Abstract</h2>
+            <div class="abstract-text">
+                Zero-shot singing voice conversion (SVC) has shown strong performance on controlled benchmarks, yet remains unstable in real-world industrial settings. In practice, SVC systems must handle imperfect vocal inputs with residual harmonies and often rely on speech recordings as timbre references. The resulting speech–singing domain mismatch, together with singing’s sensitivity to pitch-dependent timbre variation and high-frequency details, makes it difficult for existing methods to simultaneously achieve robustness and perceptual quality.
+                <br><br>
+                We propose a real-world robust zero-shot SVC framework that addresses these challenges from three perspectives. First, we introduce robust conditioning to alleviate content–timbre entanglement caused by harmony contamination. Second, we incorporate singing-specific inductive biases, including an RVC-based timbre shifter and pitch-aware timbre adaptation, to enhance timbral stability and preserve perceptually important high-frequency components. Third, we formulate speech-referenced SVC as a targeted post-training problem and employ an SVC-oriented reinforcement learning scheme to address low-variance optimization, multi-objective reward trade-offs, and reward instability under domain mismatch.
+                <br><br>
+                Experiments under realistic conditions demonstrate consistent improvements in robustness, timbre consistency, and perceptual naturalness, with particularly pronounced gains when speech references are used.
+            </div>
+            
+            <div style="margin-top: 50px;">
+                <h3 style="color:var(--text-muted); margin-bottom:15px; text-align:center;">System Architecture</h3>
+                <div class="img-container">
+                    <a href="./image/overview.png" target="_blank">
+                        <img src="./image/overview.png" alt="System Framework Overview" title="Click to enlarge" onerror="this.parentElement.innerHTML='<span style=\'color:red\'>Image not found: ./image/overview.png</span>'">
+                    </a>
+                </div>
+                <div style="text-align:center; margin-top:10px; font-size:0.9rem;">
+                    <span style="color:var(--text-muted); font-style: italic;">Figure 1: The proposed framework architecture. (Click image to enlarge)</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="mix-section">
+            <h2>🎵 Mix Task (Robustness)</h2>
+            <p style="color:var(--text-muted); margin-bottom:20px;">Evaluation on mixed scenarios with noise and harmonies.</p>
+            
+            <div id="mix-container" class="table-wrapper"></div>
+
+            <div class="spec-container">
+                <div class="spec-header">
+                    <h3>Visual Analysis</h3>
+                    <span class="spec-tag">Case: 00fc7649...</span>
+                </div>
+                <div class="spec-grid">
+                    <div class="spec-card"><img src="./spectrograms/mix/source.png" loading="lazy"><div class="spec-label label-highlight">Source</div></div>
+                    <div class="spec-card"><img src="./spectrograms/mix/target.png" loading="lazy"><div class="spec-label label-highlight">Target</div></div>
+                    <div class="spec-card"><img src="./spectrograms/mix/FreeSVC.png" loading="lazy"><div class="spec-label">FreeSVC</div></div>
+                    <div class="spec-card"><img src="./spectrograms/mix/Samoye.png" loading="lazy"><div class="spec-label">Samoye</div></div>
+                    <div class="spec-card"><img src="./spectrograms/mix/Seed-VC.png" loading="lazy"><div class="spec-label">Seed-VC</div></div>
+                    <div class="spec-card" style="border-color:var(--accent-blue)"><img src="./spectrograms/mix/Ours.png" loading="lazy"><div class="spec-label label-highlight" style="color:var(--accent-blue)">Ours</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="speech-section">
+            <h2>🗣️ Speech-Enhanced Task</h2>
+            <p style="color:var(--text-muted); margin-bottom:20px;">
+                In this section, we demonstrate Zero-Shot SVC using <strong>speech recordings</strong> as the target timbre reference. This task evaluates the model's ability to bridge the <strong>speech-to-singing domain mismatch</strong> and accurately clone the speaker's vocal identity into a singing context.
+            </p>
+            
+            <div id="speech-container" class="table-wrapper"></div>
+
+            <div class="spec-container">
+                <div class="spec-header">
+                    <h3>Visual Analysis</h3>
+                    <span class="spec-tag">Case: 36966_002 (ita.wav)</span>
+                </div>
+                <p style="color:#aaa; font-size:0.9rem; margin-bottom:20px; font-style:italic;">
+                    Our method not only significantly reduces high-frequency artifacts but also faithfully captures the articulation style and pronunciation habits of the reference speech.
+                </p>
+                <div class="spec-grid">
+                    <div class="spec-card">
+                        <img src="./spectrograms/speech/source.png" loading="lazy" onerror="this.src='https://via.placeholder.com/300x150?text=Missing+Source';">
+                        <div class="spec-label label-highlight">Source (Vocals.wav)</div>
+                    </div>
+                    <div class="spec-card">
+                        <img src="./spectrograms/speech/target.png" loading="lazy" onerror="this.src='https://via.placeholder.com/300x150?text=Missing+Target';">
+                        <div class="spec-label label-highlight">Target (Speech)</div>
+                    </div>
+                    <div class="spec-card"><img src="./spectrograms/speech/FreeSVC.png" loading="lazy"><div class="spec-label">FreeSVC</div></div>
+                    <div class="spec-card"><img src="./spectrograms/speech/Samoye.png" loading="lazy"><div class="spec-label">Samoye</div></div>
+                    <div class="spec-card"><img src="./spectrograms/speech/Seed-VC.png" loading="lazy"><div class="spec-label">Seed-VC</div></div>
+                    <div class="spec-card" style="border-color:var(--accent-blue)"><img src="./spectrograms/speech/Ours.png" loading="lazy"><div class="spec-label label-highlight" style="color:var(--accent-blue)">Ours</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sing-section">
+            <h2>🎤 Sing-Enhanced Task</h2>
+            <p style="color:var(--text-muted); margin-bottom:20px;">Standard singing conversion (High-frequency details).</p>
+            
+            <div id="sing-container" class="table-wrapper"></div>
+
+            <div class="spec-container">
+                <div class="spec-header">
+                    <h3>Visual Analysis</h3>
+                    <span class="spec-tag">Case: Sample 1</span>
+                </div>
+                <div class="spec-grid">
+                    <div class="spec-card"><img src="./spectrograms/sing/source.png" loading="lazy"><div class="spec-label label-highlight">Source</div></div>
+                    <div class="spec-card"><img src="./spectrograms/sing/target.png" loading="lazy"><div class="spec-label label-highlight">Target</div></div>
+                    <div class="spec-card"><img src="./spectrograms/sing/FreeSVC.png" loading="lazy"><div class="spec-label">FreeSVC</div></div>
+                    <div class="spec-card"><img src="./spectrograms/sing/Samoye.png" loading="lazy"><div class="spec-label">Samoye</div></div>
+                    <div class="spec-card"><img src="./spectrograms/sing/Seed-VC.png" loading="lazy"><div class="spec-label">Seed-VC</div></div>
+                    <div class="spec-card" style="border-color:var(--accent-blue)"><img src="./spectrograms/sing/Ours.png" loading="lazy"><div class="spec-label label-highlight" style="color:var(--accent-blue)">Ours</div></div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // ==========================================
+        // Data Config
+        // ==========================================
+        const config = {
+            mix: {
+                root: 'mix', type: 'folder_structure', sourceFile: 'mix_vocal.wav',
+                models: [{ name: 'FreeSVC', folder: 'freesvc' }, { name: 'Samoye', folder: 'samoye' }, { name: 'Seed-VC', folder: 'seed_vc_baseline' }, { name: 'Ours', folder: 'ours_weight_mul_1951' }],
+                
+                annotations: {
+                    "00fc7649-8400-4cc9-95a4-1bbd92b0dfd7": "Contains mild vocal doubling and harmonies.",
+                    "0b15fd96-4210-4b19-aa49-6a59267d4945": "Contains multiple vocal harmonies. Compared to Seed-VC, our method effectively mitigates this issue.",
+                    "0ddbd2e7-ebae-46b3-bf56-45c8e7952fc2": "The sudden pitch fluctuation at the 5th second is successfully eliminated.",
+                    "3b813eac-e2e2-4e3d-bd9e-ff20d038b964": "Dense harmonies starting at 5s disrupt Seed-VC, whereas our method successfully mitigates this issue.",
+                    "4ab54552-5311-42ae-9196-9fb85ecb9230": "The interleaved lead and backing vocals after the 10-second mark disrupt Seed-VC, but our method effectively mitigates this issue."
+                },
+
+                items: [
+                    { id: "00fc7649...", fullId: "00fc7649-8400-4cc9-95a4-1bbd92b0dfd7", target: "青年活力女.wav" },
+                    { id: "0b15fd96...", fullId: "0b15fd96-4210-4b19-aa49-6a59267d4945", target: "女童.wav" },
+                    { id: "0ddbd2e7...", fullId: "0ddbd2e7-ebae-46b3-bf56-45c8e7952fc2", target: "女童.wav" },
+                    { id: "3b813eac...", fullId: "3b813eac-e2e2-4e3d-bd9e-ff20d038b964", target: "老年男1.wav" },
+                    { id: "4ab54552...", fullId: "4ab54552-5311-42ae-9196-9fb85ecb9230", target: "青年解说男.wav" }
+                ]
+            },
+            speech: {
+                root: 'speech-enhanced', type: 'folder_structure', sourceFile: 'vocals.wav', 
+                models: [{ name: 'FreeSVC', folder: 'freesvc' }, { name: 'Samoye', folder: 'samoye' }, { name: 'Seed-VC', folder: 'seed_vc_baseline' }, { name: 'Ours', folder: 'ours_weight_mul_1951' }],
+                items: [
+                    { id: '36966_002', fullId: '36966_002', target: 'ita.wav', sourceOverride: 'vocals.wav' }, 
+                    { id: '36966_007', fullId: '36966_007', target: 'jap.wav', sourceOverride: 'vocals.wav' },
+                    { id: '36967_005', fullId: '36967_005', target: 'Gretchen.wav', sourceOverride: 'vocals.wav' }
+                ]
+            },
+            sing: {
+                root: 'sing-enhanced', type: 'file_structure',
+                models: [{ name: 'FreeSVC', folder: 'free-svc' }, { name: 'Samoye', folder: 'samoye-svc' }, { name: 'Seed-VC', folder: 'seed-vc' }, { name: 'Ours', folder: 'ours' }],
+                items: [ { id: 'Sample 1', fullId: '1', filename: '1.wav' }, { id: 'Sample 2', fullId: '2', filename: '2.wav' } ]
+            }
+        };
+
+        // ==========================================
+        // Renderer
+        // ==========================================
+        function renderTable(sectionId, taskConfig) {
+            const container = document.getElementById(sectionId);
+            const table = document.createElement('table');
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            
+            // Colspan = ID(1) + Source(1) + Target(1) + Models(N)
+            const colCount = 3 + taskConfig.models.length;
+
+            // --- Header: WITH ID ---
+            headerRow.innerHTML = `<th class="col-id">ID</th><th class="col-input">Source</th><th class="col-input">Target</th>`;
+            taskConfig.models.forEach(model => {
+                const th = document.createElement('th'); 
+                th.innerText = model.name; 
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow); table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
+            taskConfig.items.forEach(item => {
+                const realId = item.fullId || item.id;
+
+                // --- Annotation Row ---
+                if (taskConfig.annotations && taskConfig.annotations[realId]) {
+                    const trAnno = document.createElement('tr');
+                    trAnno.className = 'annotation-row';
+                    const tdAnno = document.createElement('td');
+                    tdAnno.colSpan = colCount;
+                    tdAnno.innerHTML = `<span class="annotation-icon">📝</span>${taskConfig.annotations[realId]}`;
+                    trAnno.appendChild(tdAnno);
+                    tbody.appendChild(trAnno);
+                }
+
+                // --- Audio Row ---
+                const tr = document.createElement('tr');
+                
+                // 1. ID Cell (Updated: Only show 1st segment)
+                const tdId = document.createElement('td'); 
+                tdId.className = 'cell-id'; 
+                // Display: Extract part before the first hyphen
+                tdId.innerText = (realId || item.id).split('-')[0];
+                tdId.title = realId; // Tooltip shows full ID
+                tr.appendChild(tdId);
+
+                let sourcePath, timbrePath;
+                let modelPaths = [];
+
+                if (taskConfig.type === 'folder_structure') {
+                    const sourceName = item.sourceOverride || taskConfig.sourceFile;
+                    sourcePath = `./${taskConfig.root}/org/${realId}/${sourceName}`;
+                    timbrePath = `./${taskConfig.root}/timbre/${item.target}`;
+                    taskConfig.models.forEach(model => modelPaths.push(`./${taskConfig.root}/${model.folder}/${realId}/${item.target}`));
+                } else {
+                    sourcePath = `./${taskConfig.root}/org/${item.filename}`;
+                    timbrePath = `./${taskConfig.root}/timbre/${item.filename}`;
+                    taskConfig.models.forEach(model => modelPaths.push(`./${taskConfig.root}/${model.folder}/${item.filename}`));
+                }
+
+                tr.appendChild(createAudioCell(sourcePath));
+                tr.appendChild(createAudioCell(timbrePath));
+                modelPaths.forEach(path => tr.appendChild(createAudioCell(path)));
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody); container.appendChild(table);
+        }
+
+        function createAudioCell(src) {
+            const td = document.createElement('td');
+            const audio = document.createElement('audio'); 
+            audio.controls = true; audio.preload = "none";
+            const source = document.createElement('source'); 
+            source.src = src; source.type = "audio/wav";
+            
+            source.onerror = function() { 
+                audio.style.display = 'none'; 
+                const badge = document.createElement('div'); 
+                badge.className = 'error-badge'; 
+                badge.innerText = 'N/A'; 
+                td.appendChild(badge); 
+            };
+            
+            audio.appendChild(source); td.appendChild(audio);
+            return td;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTable('mix-container', config.mix);
+            renderTable('speech-container', config.speech);
+            renderTable('sing-container', config.sing);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+The sudden pitch fluctuation at the 5th second is successfully eliminated.

@@ -1,0 +1,1 @@
+The interleaved lead and backing vocals after the 10-second mark disrupt Seed-VC, but our method effectively mitigates this issue.

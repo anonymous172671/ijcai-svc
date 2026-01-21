@@ -1,0 +1,1 @@
+Dense harmonies starting at 5s disrupt Seed-VC, whereas our method successfully mitigates this issue.
