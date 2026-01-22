@@ -85,17 +85,17 @@
             text-decoration: none; 
             color: var(--text-muted); 
             font-weight: 600; 
-            padding: 6px 14px;
-            border-radius: 20px;
-            transition: all 0.3s;
+            padding: 6px 14px; 
+            border-radius: 20px; 
+            transition: all 0.3s; 
             font-size: 0.85rem; 
             display: inline-block;
         }
 
         nav a:hover { 
-            background: var(--accent-primary);
-            color: white;
-            transform: translateY(-2px);
+            background: var(--accent-primary); 
+            color: white; 
+            transform: translateY(-2px); 
         }
 
         .nav-top a { font-size: 0.9rem; color: #fff; }
@@ -370,10 +370,21 @@
             </div>
         </section>
 
+        <div style="margin: 60px 0 50px; text-align: center;">
+            <h2 style="justify-content: center; border: none; font-size: 1.8rem; margin-bottom: 15px; color: #fff;">
+                🎧 Audio Demos
+            </h2>
+            <p style="color: var(--text-muted); font-size: 1rem; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+                We present audio demos under three SVC settings corresponding to the experiments in our paper.<br>
+                For each setting, we compare three baseline systems with our proposed method.
+            </p>
+            <div style="width: 50px; height: 3px; background: var(--accent-primary); margin: 25px auto 0; border-radius: 2px;"></div>
+        </div>
+
         <section id="mix-section">
             <h2>🎵 Real world Mix-vocal cases</h2>
             <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">
-                Source vocals derived from practical scenarios containing residual harmonic interference.
+                The source input is a real-world mixed vocal obtained via music–vocal separation, containing residual backing harmony. This setting reflects practical SVC scenarios. Please focus on pitch stability, lyrical clarity, and timbre consistency under noisy input conditions.
             </p>
             <div id="mix-container"></div>
             
@@ -399,7 +410,7 @@
         <section id="speech-section">
             <h2>🗣️ Cases of speech vocal as reference timbre</h2>
             <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">
-                Zero-Shot SVC using speech recordings as the target timbre reference.
+                The target timbre is provided using speech-only reference audio. This introduces a domain mismatch between speech and singing.
             </p>
             <div id="speech-container"></div>
 
@@ -422,7 +433,7 @@
         <section id="sing-section">
             <h2>🎤 Cases of singing vocal as reference timbre</h2>
             <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">
-                Zero-Shot Singing Voice Conversion using sing timbre for inference.
+                Both the source and reference are singing vocals. This is the standard SVC setting. Listeners may focus on fine-grained timbre similarity, pitch smoothness, and musical naturalness.
             </p>
             <div id="sing-container"></div>
 
