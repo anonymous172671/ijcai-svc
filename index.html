@@ -388,8 +388,8 @@
                         <img src="./spectrograms/mix/clean_vocal_0b15fd96.png" loading="lazy" alt="Clean Vocal">
                         <div class="spec-label" style="color:#2ecc71;">Source (Clean Vocal)</div>
                     </div>
-                    <div class="spec-item"><img src="./spectrograms/mix/FreeSVC.png" loading="lazy" alt="FreeSVC"><div class="spec-label">FreeSVC</div></div>
-                    <div class="spec-item"><img src="./spectrograms/mix/Samoye.png" loading="lazy" alt="Samoye"><div class="spec-label">Samoye</div></div>
+                    <div class="spec-item"><img src="./spectrograms/mix/FreeSVC.png" loading="lazy" alt="FreeSVC"><div class="spec-label">FreeSVC (ICASSP 2025)</div></div>
+                    <div class="spec-item"><img src="./spectrograms/mix/Samoye.png" loading="lazy" alt="Samoye"><div class="spec-label">Samoye (IJCAI 2025)</div></div>
                     <div class="spec-item"><img src="./spectrograms/mix/Seed-VC.png" loading="lazy" alt="Seed-VC"><div class="spec-label">Seed-VC</div></div>
                     <div class="spec-item ours-spec"><img src="./spectrograms/mix/Ours.png" loading="lazy" alt="Ours"><div class="spec-label" style="color:var(--accent-primary);">Ours (Proposed)</div></div>
                 </div>
@@ -406,13 +406,13 @@
             <div class="spec-section">
                 <h3>🔍 Speech Vocal Reference (Case: 36966_002)</h3>
                 <p style="font-size:0.85rem; color:#aaa; margin-bottom:15px;">
-                    Singing pronunciation more consistent with the reference timbre, and with less high-freq artifacts.
+                    Singing pronunciation more consistent with the reference timbre.
                 </p>
                 <div class="spec-grid">
                     <div class="spec-item"><img src="./spectrograms/speech/source.png" loading="lazy" alt="Source"><div class="spec-label">Source (Vocal)</div></div>
                     <div class="spec-item"><img src="./spectrograms/speech/target.png" loading="lazy" alt="Target"><div class="spec-label">Target (Speech)</div></div>
-                    <div class="spec-item"><img src="./spectrograms/speech/FreeSVC.png" loading="lazy" alt="FreeSVC"><div class="spec-label">FreeSVC</div></div>
-                    <div class="spec-item"><img src="./spectrograms/speech/Samoye.png" loading="lazy" alt="Samoye"><div class="spec-label">Samoye</div></div>
+                    <div class="spec-item"><img src="./spectrograms/speech/FreeSVC.png" loading="lazy" alt="FreeSVC"><div class="spec-label">FreeSVC (ICASSP 2025)</div></div>
+                    <div class="spec-item"><img src="./spectrograms/speech/Samoye.png" loading="lazy" alt="Samoye"><div class="spec-label">Samoye (IJCAI 2025)</div></div>
                     <div class="spec-item"><img src="./spectrograms/speech/Seed-VC.png" loading="lazy" alt="Seed-VC"><div class="spec-label">Seed-VC</div></div>
                     <div class="spec-item ours-spec"><img src="./spectrograms/speech/Ours.png" loading="lazy" alt="Ours"><div class="spec-label" style="color:var(--accent-primary);">Ours (Proposed)</div></div>
                 </div>
@@ -434,8 +434,8 @@
                 <div class="spec-grid">
                     <div class="spec-item"><img src="./spectrograms/sing/source.png" loading="lazy" alt="Source"><div class="spec-label">Source Song</div></div>
                     <div class="spec-item"><img src="./spectrograms/sing/target.png" loading="lazy" alt="Target"><div class="spec-label">Target Timbre</div></div>
-                    <div class="spec-item"><img src="./spectrograms/sing/FreeSVC.png" loading="lazy" alt="FreeSVC"><div class="spec-label">FreeSVC</div></div>
-                    <div class="spec-item"><img src="./spectrograms/sing/Samoye.png" loading="lazy" alt="Samoye"><div class="spec-label">Samoye</div></div>
+                    <div class="spec-item"><img src="./spectrograms/sing/FreeSVC.png" loading="lazy" alt="FreeSVC"><div class="spec-label">FreeSVC (ICASSP 2025)</div></div>
+                    <div class="spec-item"><img src="./spectrograms/sing/Samoye.png" loading="lazy" alt="Samoye"><div class="spec-label">Samoye (IJCAI 2025)</div></div>
                     <div class="spec-item"><img src="./spectrograms/sing/Seed-VC.png" loading="lazy" alt="Seed-VC"><div class="spec-label">Seed-VC</div></div>
                     <div class="spec-item ours-spec"><img src="./spectrograms/sing/Ours.png" loading="lazy" alt="Ours"><div class="spec-label" style="color:var(--accent-primary);">Ours (Proposed)</div></div>
                 </div>
@@ -595,8 +595,8 @@
                             "target": "Speech ref.",
                             "FreeSVC": "Distortion",
                             "Samoye": "",
-                            "Seed-VC": "",
-                            "Ours": "Improved low register"
+                            "Seed-VC": "Heavy-handed stress Because of Female2Male",
+                            "Ours": "Smoother stress handling"
                         }
                     },
                 ]
@@ -741,8 +741,17 @@
                     }
                     
                     const defaultText = model.isOurs ? "Proposed Method" : ` `;
+                    
+                    // Logic to append citations to the displayed title
+                    let displayTitle = model.name;
+                    if (displayTitle === 'FreeSVC') {
+                        displayTitle += ' (ICASSP 2025)';
+                    } else if (displayTitle === 'Samoye') {
+                        displayTitle += ' (IJCAI 2025)';
+                    }
+
                     outputsRow.appendChild(createCard(
-                        model.name, 
+                        displayTitle, 
                         model.isOurs ? 'Ours' : 'Baseline', 
                         modelPath, 
                         comments[model.name] || defaultText, 
